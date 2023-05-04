@@ -40,11 +40,26 @@ public :
     bool isInside(const Point& p1, const Point& p2, const Point& p3) const;
     bool isInside(const Point& p1, const Point& p2, const Point& p3, const Point& p4) const;
 
-    Point middle() const;
+    bool isEqual(const Point& p) const;
+
+    Point middle(const Point& p) const;
+    double area(const Point& p1, const Point& p2, const Point& p3) const;
+
+    bool operator==(const Point& p) const;
+    bool operator!=(const Point& p) const;
+
+    Point& operator+=(const int val);
+    Point operator+(const int val);
+    Point& operator-=(const int val);
+    Point operator-(const int val);
 private:
     int m_x;
     int m_y;
+
 };
+
+
+/*IMPLEMENTATIONS*/
 
 double Point::distance(const Point& p) const
 {
@@ -73,6 +88,81 @@ int Point::isLeft(const Point &p1, const Point &p2) const
 int Point::isRight(const Point &p1, const Point &p2) const
 {
     return 2;
+}
+
+bool Point::isEqual(const Point &p) const
+{
+    return m_x==p.m_x && m_y==p.m_y;
+}
+
+Point Point::middle(const Point &p) const
+{
+    int x=m_x+p.m_x;
+    x/=2;
+    int y=m_y+p.m_y;
+    y/=2;
+
+    return Point(x,y); 
+}
+
+bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) const
+{
+    /* Calculate area of triangle ABC */
+   float A = area (p1, p2, p3);
+  
+   /* Calculate area of triangle PBC */ 
+   float A1 = area (*this, p2, p3);
+  
+   /* Calculate area of triangle PAC */ 
+   float A2 = area (p1, *this, p3);
+  
+   /* Calculate area of triangle PAB */  
+   float A3 = area (p1, p2, *this);
+    
+   /* Check if sum of A1, A2 and A3 is same as A */
+   return (A == A1 + A2 + A3);
+}
+
+double Point::area(const Point& p1, const Point& p2, const Point& p3) const
+{
+    return abs((p1.m_x*(p2.m_y-p3.m_y)+ p2.m_x*(p3.m_y-p1.m_y)+p3.m_x*(p1.m_y-p2.m_y))/2.0);
+}
+
+bool Point::operator==(const Point &p) const
+{
+    return this->isEqual(p);
+}
+
+bool Point::operator!=(const Point &p) const
+{
+    return !this->isEqual(p);
+}
+
+Point& Point::operator+=(const int val)
+{
+    m_x+=val;
+    m_y+=val;
+    return *this;
+}
+
+Point Point::operator+(const int val)
+{
+    Point res{*this};
+    res+=val;
+    return res;
+}
+
+Point& Point::operator-=(const int val)
+{
+    *this+=-val;
+    return *this;
+}
+
+Point Point::operator-(const int val)
+{
+    Point res{*this};
+    res-=val;
+    return res;
 }
 
 #endif
