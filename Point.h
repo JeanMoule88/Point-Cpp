@@ -44,6 +44,7 @@ public :
     int isLeft(const Point& p1, const Point& p2) const;
 
     bool isInside(const Point& p1, const Point& p2, const Point& p3) const;
+    bool isInsideCircle(const Point& p1, const Point& p2, const Point& p3) const;
     bool isInside(const Point& p1, const Point& p2, const Point& p3, const Point& p4) const;
 
     bool isEqual(const Point& p) const;
@@ -122,6 +123,28 @@ inline bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) c
     
    /* Check if sum of A1, A2 and A3 is same as A */
    return (A == A1 + A2 + A3);
+}
+
+inline bool Point::isInsideCircle(const Point &p1, const Point &p2, const Point &p3) const
+{
+    const int p1x = p1.x() - m_x;
+    const int p1y = p1.y() - m_y;
+    const int p2x = p2.x() - m_x;
+    const int p2y = p2.y() - m_y;
+    const int p3x = p3.x() - m_x;
+    const int p3y = p3.y() - m_y;
+
+    /*
+    * if det positive then the point is in the circle, if det is equal to 0 the point is on the circle
+    * else the point is outside
+    */
+    const int det = (
+        (p1x * p1x + p1y * p1y) * (p2x * p3y - p3x * p2y) -
+        (p2x * p2x + p2y * p2y) * (p1x * p3y - p3x * p1y) +
+        (p3x * p3x + p3y * p3y) * (p1x * p2y - p2x * p1y)
+        );
+
+    return det >= 0;
 }
 
 inline bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Point &p4) const
