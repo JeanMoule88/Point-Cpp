@@ -59,11 +59,26 @@ public :
     Point operator+(const int val);
     Point& operator-=(const int val);
     Point operator-(const int val);
+
+    void print(std::ostream& ost) const;
+    void read(std::istream& ist);
 private:
     int m_x;
     int m_y;
 
 };
+
+std::ostream& operator<<(std::ostream& ost, const Point& p)
+{
+    p.print(ost);
+    return ost;
+}
+
+std::istream& operator>>(std::istream& ist, Point& p)
+{
+    p.read(ist);
+    return ist;
+}
 
 
 /*IMPLEMENTATIONS*/
@@ -197,6 +212,21 @@ inline Point Point::operator-(const int val)
     Point res{*this};
     res-=val;
     return res;
+}
+
+inline void Point::print(std::ostream &ost) const
+{
+    ost<<m_x<<";"<<m_y;
+}
+
+inline void Point::read(std::istream &ist)
+{
+    char c;
+    int x,y;
+    ist>>x>>c>>y;
+
+    m_x=x;
+    m_y=y;
 }
 
 #endif

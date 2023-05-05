@@ -29,4 +29,14 @@ int main()
 
     std::cout<<"Dans rect: "<<pIn.isInside(p1, p2, p3, p4)<<std::endl;
     std::cout<<"Dans rect: "<<pOut.isInside(p1, p2, p3, p4)<<std::endl;
+
+    std::cout<<"Test lecture"<<std::endl;
+
+    Point p(12,28);
+
+    std::cout<<"Point: "<<p<<std::endl;
+
+    std::cin>>p;
+
+    std::cout<<"P rentre: "<<p<<std::endl;
 }
