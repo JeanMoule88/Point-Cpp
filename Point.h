@@ -68,13 +68,13 @@ private:
 
 };
 
-std::ostream& operator<<(std::ostream& ost, const Point& p)
+inline std::ostream& operator<<(std::ostream& ost, const Point& p)
 {
     p.print(ost);
     return ost;
 }
 
-std::istream& operator>>(std::istream& ist, Point& p)
+inline std::istream& operator>>(std::istream& ist, Point& p)
 {
     p.read(ist);
     return ist;
