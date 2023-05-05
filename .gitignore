@@ -50,3 +50,7 @@
 # Ignore all local history of files
 .history
 .ionide
+
+# Others
+.vscode
+main.cpp
