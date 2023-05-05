@@ -2,6 +2,7 @@
 #define POINT_H
 
 #include<cmath>
+#include <iostream>
 
 class Point
 {
@@ -26,16 +27,21 @@ public :
         setY(y);
     };
 
+    /**
+     * @brief 
+     * 
+     * @param p 
+     * @return double - the distance between the 2 points
+     */
     double distance(const Point& p) const;
 
     /**
      * @brief 
      * @param p1 
      * @param p2 
-     * @return int 1, -1 or 0 if the point is left right or on (ab)
+     * @return int 1, -1 or 0 if the point is left right or on (p1p2)
      */
     int isLeft(const Point& p1, const Point& p2) const;
-    int isRight(const Point& p1, const Point& p2) const;
 
     bool isInside(const Point& p1, const Point& p2, const Point& p3) const;
     bool isInside(const Point& p1, const Point& p2, const Point& p3, const Point& p4) const;
@@ -85,11 +91,6 @@ int Point::isLeft(const Point &p1, const Point &p2) const
     }
 }
 
-int Point::isRight(const Point &p1, const Point &p2) const
-{
-    return 2;
-}
-
 bool Point::isEqual(const Point &p) const
 {
     return m_x==p.m_x && m_y==p.m_y;
@@ -121,6 +122,16 @@ bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) const
     
    /* Check if sum of A1, A2 and A3 is same as A */
    return (A == A1 + A2 + A3);
+}
+
+bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Point &p4) const
+{
+    int b1=this->isLeft(p1,p2);
+    int b2=this->isLeft(p2,p3);
+    int b3=this->isLeft(p3,p4);
+    int b4=this->isLeft(p4,p1);
+
+    return (b1==b2)&&(b1==b3)&&(b1==b4);
 }
 
 double Point::area(const Point& p1, const Point& p2, const Point& p3) const
