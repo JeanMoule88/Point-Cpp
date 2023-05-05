@@ -67,13 +67,13 @@ private:
 
 /*IMPLEMENTATIONS*/
 
-double Point::distance(const Point& p) const
+inline double Point::distance(const Point& p) const
 {
     double dx = p.m_x-m_x, dy = p.m_y-m_y;
     return std::sqrt(dx*dx + dy*dy);
 }
 
-int Point::isLeft(const Point &p1, const Point &p2) const
+inline int Point::isLeft(const Point &p1, const Point &p2) const
 {
     int det = (p2.x()-p1.x())*(m_y-p1.y())-(m_x-p1.x())*(p2.y()-p1.y());
 
@@ -91,12 +91,12 @@ int Point::isLeft(const Point &p1, const Point &p2) const
     }
 }
 
-bool Point::isEqual(const Point &p) const
+inline bool Point::isEqual(const Point &p) const
 {
     return m_x==p.m_x && m_y==p.m_y;
 }
 
-Point Point::middle(const Point &p) const
+inline Point Point::middle(const Point &p) const
 {
     int x=m_x+p.m_x;
     x/=2;
@@ -106,7 +106,7 @@ Point Point::middle(const Point &p) const
     return Point(x,y); 
 }
 
-bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) const
+inline bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) const
 {
     /* Calculate area of triangle ABC */
    float A = area (p1, p2, p3);
@@ -124,7 +124,7 @@ bool Point::isInside(const Point& p1, const Point& p2, const Point& p3) const
    return (A == A1 + A2 + A3);
 }
 
-bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Point &p4) const
+inline bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Point &p4) const
 {
     int b1=this->isLeft(p1,p2);
     int b2=this->isLeft(p2,p3);
@@ -134,42 +134,42 @@ bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Po
     return (b1==b2)&&(b1==b3)&&(b1==b4);
 }
 
-double Point::area(const Point& p1, const Point& p2, const Point& p3) const
+inline double Point::area(const Point& p1, const Point& p2, const Point& p3) const
 {
     return abs((p1.m_x*(p2.m_y-p3.m_y)+ p2.m_x*(p3.m_y-p1.m_y)+p3.m_x*(p1.m_y-p2.m_y))/2.0);
 }
 
-bool Point::operator==(const Point &p) const
+inline bool Point::operator==(const Point &p) const
 {
     return this->isEqual(p);
 }
 
-bool Point::operator!=(const Point &p) const
+inline bool Point::operator!=(const Point &p) const
 {
     return !this->isEqual(p);
 }
 
-Point& Point::operator+=(const int val)
+inline Point& Point::operator+=(const int val)
 {
     m_x+=val;
     m_y+=val;
     return *this;
 }
 
-Point Point::operator+(const int val)
+inline Point Point::operator+(const int val)
 {
     Point res{*this};
     res+=val;
     return res;
 }
 
-Point& Point::operator-=(const int val)
+inline Point& Point::operator-=(const int val)
 {
     *this+=-val;
     return *this;
 }
 
-Point Point::operator-(const int val)
+inline Point Point::operator-(const int val)
 {
     Point res{*this};
     res-=val;
