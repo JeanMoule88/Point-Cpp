@@ -159,7 +159,7 @@ inline bool Point::isInsideCircle(const Point &p1, const Point &p2, const Point 
         (p3x * p3x + p3y * p3y) * (p1x * p2y - p2x * p1y)
         );
 
-    return det >= 0;
+    return det > 0;
 }
 
 inline bool Point::isInside(const Point &p1, const Point &p2, const Point &p3, const Point &p4) const
