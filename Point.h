@@ -159,7 +159,7 @@ inline bool Point::isInsideCircle(const Point &p1, const Point &p2, const Point 
     * if det positive then the point is in the circle, if det is equal to 0 the point is on the circle
     * else the point is outside
     */
-    const int det = (
+    const long double det = (
         a * (e * i - f * h) -
         b * (d * i - f * g) +
         c * (d * h - e * g)
