@@ -145,15 +145,15 @@ inline bool Point::isInsideCircle(const Point &p1, const Point &p2, const Point 
 {
     const int a = p1.x() - m_x;
     const int b = p1.y() - m_y;
-    const int c = (a * a + b * b);
+    const long double c = (a * a + b * b);
 	
     const int d = p2.x() - m_x;
     const int e = p2.y() - m_y;
-    const int f = (d * d + e * e);
+    const long double f = (d * d + e * e);
 	
     const int g = p3.x() - m_x;
     const int h = p3.y() - m_y;
-    const int i = (g * g + h * h);
+    const long double i = (g * g + h * h);
 
     /*
     * if det positive then the point is in the circle, if det is equal to 0 the point is on the circle
